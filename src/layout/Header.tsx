@@ -47,11 +47,11 @@ const useStyles = makeStyles({
             color: grey[300]
         },
         '&.MuiInputLabel-outlined': {
-            color: grey[300],
-            top: '-14px'
+            color: grey[300]
         },
         '&.css-1sumxir-MuiFormLabel-root-MuiInputLabel-root.Mui-focused': {
-            color: grey[300]
+            color: grey[300],
+            top: '-14px'
         }
     },
     '&.MuiList-root': {
@@ -66,8 +66,6 @@ interface IHeaderProps {
 
 const Header: React.FC<IHeaderProps> = ({ isEditAddPage, title }) => {
     const classes = useStyles();
-    console.log('classes', classes);
-
     // const handleChange = (e: SelectChangeEvent) => {
     //     console.log('e', e);
     // };
