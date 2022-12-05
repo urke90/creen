@@ -1,0 +1,20 @@
+.header {
+    padding: 20px 30px;
+    background-color: #0b52a2;
+    color: #ffffff;
+    &__back-arrow {
+        color: #ffffff;
+        margin-bottom: 30px;
+    }
+    &__content {
+        display: flex;
+        padding-left: 50px;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+    &__select {
+        color: #ffffff;
+    }
+}
