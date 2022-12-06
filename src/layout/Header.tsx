@@ -6,7 +6,6 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { makeStyles } from '@mui/styles';
 import { grey } from '@mui/material/colors';
 import { IBook } from '../ts/books';
-import { useCallback } from 'react';
 
 import './Headers.scss';
 
@@ -77,10 +76,10 @@ const Header: React.FC<IHeaderProps> = ({
     selectedAuthorName
 }) => {
     const classes = useStyles();
-    const handleChange = useCallback((e: SelectChangeEvent) => {
+    const handleChange = (e: SelectChangeEvent) => {
         console.log('e', e);
         onChangeAuthor(e.target.value as string);
-    }, []);
+    };
 
     return (
         <header className="header">

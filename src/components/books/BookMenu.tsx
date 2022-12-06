@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -9,9 +10,14 @@ const ITEM_HEIGHT = 48;
 interface IBookMenuProps {
     title: string;
     bookId: number;
+    onDeleteBook: (id: number) => void;
 }
 
-const BookMenu: React.FC<IBookMenuProps> = ({ bookId, title }) => {
+const BookMenu: React.FC<IBookMenuProps> = ({
+    bookId,
+    title,
+    onDeleteBook
+}) => {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -19,6 +25,11 @@ const BookMenu: React.FC<IBookMenuProps> = ({ bookId, title }) => {
     };
     const handleClose = () => {
         setAnchorEl(null);
+    };
+
+    const handleDeleteBook = () => {
+        onDeleteBook(bookId);
+        handleClose();
     };
 
     return (
@@ -48,9 +59,19 @@ const BookMenu: React.FC<IBookMenuProps> = ({ bookId, title }) => {
                     }
                 }}
             >
-                <MenuItem onClick={handleClose}>Delete</MenuItem>
+                <MenuItem onClick={handleDeleteBook}>Delete</MenuItem>
                 <MenuItem onClick={handleClose}>Preview</MenuItem>
-                <MenuItem onClick={handleClose}>Edit</MenuItem>
+                <MenuItem onClick={handleClose}>
+                    <Link
+                        style={{
+                            textDecoration: 'none',
+                            color: 'inherit'
+                        }}
+                        to={`/book/${bookId}`}
+                    >
+                        Edit
+                    </Link>
+                </MenuItem>
             </Menu>
         </div>
     );
