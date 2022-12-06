@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
+import { Box } from '@mui/system';
 
 import { useAxios } from '../hooks/use-axios';
 import { IBook } from '../ts/books';
 
 import Header from '../layout/Header';
 import LoadingSpinner from '../shared/LoadingSpinner';
+import BooksTable from '../components/books/BooksTable';
 
 const Books: React.FC = () => {
     const [books, setBooks] = useState<IBook[]>([]);
@@ -33,11 +35,14 @@ const Books: React.FC = () => {
     return (
         <>
             {isLoading && <LoadingSpinner />}
-            <div className="books">
-                <div className="books-header">
+            <Box sx={{ maxWidth: '1024px', margin: 'auto' }} className="books">
+                <div className="books__header">
                     <Header title="Books" />
                 </div>
-            </div>
+                <div className="books__content">
+                    <BooksTable books={books} />
+                </div>
+            </Box>
         </>
     );
 };
