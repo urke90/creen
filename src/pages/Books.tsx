@@ -4,6 +4,7 @@ import { useAxios } from '../hooks/use-axios';
 import { IBook } from '../ts/books';
 
 import Header from '../layout/Header';
+import LoadingSpinner from '../shared/LoadingSpinner';
 
 const Books: React.FC = () => {
     const [books, setBooks] = useState<IBook[]>([]);
@@ -30,11 +31,14 @@ const Books: React.FC = () => {
     }, [books.length, sendRequest]);
 
     return (
-        <div className="books">
-            <div className="books-header">
-                <Header title="Books" />
+        <>
+            {isLoading && <LoadingSpinner />}
+            <div className="books">
+                <div className="books-header">
+                    <Header title="Books" />
+                </div>
             </div>
-        </div>
+        </>
     );
 };
 
