@@ -15,7 +15,11 @@ interface IBooksTable {
     books: IBook[];
 }
 
-const Row: React.FC<{ book: IBook }> = ({ book }) => {
+interface IRowBook {
+    book: IBook;
+}
+
+const Row: React.FC<IRowBook> = ({ book }) => {
     const {
         title,
         nameOfAuthor,
@@ -26,16 +30,20 @@ const Row: React.FC<{ book: IBook }> = ({ book }) => {
         id
     } = book;
 
+    console.log('title', title);
+    console.log('coverPhoto', coverPhoto);
+
     return (
         <>
             <TableRow
                 sx={{
                     '& > *': {
                         borderBottom: 'unset'
+                        //irection: 'row reverse'
                     }
                 }}
             >
-                <TableCell colSpan={0}>
+                <TableCell>
                     <Box
                         component="img"
                         sx={{
@@ -46,15 +54,16 @@ const Row: React.FC<{ book: IBook }> = ({ book }) => {
                         src={coverPhoto}
                     />
                 </TableCell>
-                <TableCell align="center">{title}</TableCell>
-                <TableCell align="center">{nameOfAuthor}</TableCell>
+                <TableCell component="th" scope="row">
+                    {title}
+                </TableCell>
+                <TableCell size="medium" align="center">
+                    {nameOfAuthor}
+                </TableCell>
                 <TableCell align="center">{yearOfBublishing}</TableCell>
                 <TableCell align="center">{numOfPages}</TableCell>
                 <TableCell align="center">{quantity}</TableCell>
-                <TableCell
-                    style={{ paddingBottom: 0, paddingTop: 0 }}
-                    colSpan={6}
-                >
+                <TableCell style={{ paddingBottom: 0, paddingTop: 0 }}>
                     <BookMenu bookId={id} title={title} />
                 </TableCell>
             </TableRow>
@@ -63,27 +72,19 @@ const Row: React.FC<{ book: IBook }> = ({ book }) => {
 };
 
 const BooksTable: React.FC<IBooksTable> = ({ books }) => {
+    console.log('books', books);
+
     return (
         <TableContainer component={Paper}>
-            <Table aria-label="collapsible table">
+            <Table>
                 <TableHead>
                     <TableRow>
                         <TableCell />
-                        <TableCell align="center" size="medium">
-                            Title
-                        </TableCell>
-                        <TableCell size="medium" align="center">
-                            Author
-                        </TableCell>
-                        <TableCell align="center" size="medium">
-                            Year
-                        </TableCell>
-                        <TableCell align="center" size="medium">
-                            Pages
-                        </TableCell>
-                        <TableCell align="center" size="medium">
-                            Quantity
-                        </TableCell>
+                        <TableCell align="center">Title</TableCell>
+                        <TableCell align="center">Author</TableCell>
+                        <TableCell align="center">Year</TableCell>
+                        <TableCell align="center">Pages</TableCell>
+                        <TableCell align="center">Quantity</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>

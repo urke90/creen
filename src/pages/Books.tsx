@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Box } from '@mui/system';
 
 import { useAxios } from '../hooks/use-axios';
@@ -10,7 +10,13 @@ import BooksTable from '../components/books/BooksTable';
 
 const Books: React.FC = () => {
     const [books, setBooks] = useState<IBook[]>([]);
+    const [authorName, setAuthorName] = useState('');
     const { sendRequest, isLoading, error } = useAxios();
+
+    const handleChangeAuthor = useCallback(
+        (name: string) => setAuthorName(name),
+        []
+    );
 
     useEffect(() => {
         const fetchBooks = async () => {
@@ -27,20 +33,24 @@ const Books: React.FC = () => {
                 console.log('response', response);
             } catch (error) {}
         };
-        if (books.length === 0) {
-            fetchBooks();
-        }
-    }, [books.length, sendRequest]);
+
+        fetchBooks();
+    }, [sendRequest]);
 
     return (
         <>
-            {isLoading && <LoadingSpinner />}
-            <Box sx={{ maxWidth: '1024px', margin: 'auto' }} className="books">
+            {/* {isLoading && <LoadingSpinner />} */}
+            <Box sx={{ maxWidth: '1024px', margin: 'auto' }}>
                 <div className="books__header">
-                    <Header title="Books" />
+                    <Header
+                        title="Books"
+                        books={books}
+                        onChangeAuthor={handleChangeAuthor}
+                        selectedAuthorName={authorName}
+                    />
                 </div>
                 <div className="books__content">
-                    <BooksTable books={books} />
+                    {books.length > 0 ? <BooksTable books={books} /> : null}
                 </div>
             </Box>
         </>
