@@ -7,6 +7,7 @@ import { IBook } from '../ts/books';
 import Header from '../layout/Header';
 import LoadingSpinner from '../shared/LoadingSpinner';
 import BooksTable from '../components/books/BooksTable';
+import AddBookButton from '../components/books/AddBookButton';
 
 const Books: React.FC = () => {
     const [books, setBooks] = useState<IBook[]>([]);
@@ -57,7 +58,13 @@ const Books: React.FC = () => {
     return (
         <>
             {isLoading && <LoadingSpinner />}
-            <Box sx={{ maxWidth: '1024px', margin: 'auto' }}>
+            <Box
+                sx={{
+                    maxWidth: '1024px',
+                    margin: 'auto',
+                    position: 'relative'
+                }}
+            >
                 <div className="books__header">
                     <Header
                         title="Books"
@@ -66,6 +73,9 @@ const Books: React.FC = () => {
                         selectedAuthorName={authorName}
                     />
                 </div>
+                <Box>
+                    <AddBookButton />
+                </Box>
                 <div className="books__content">
                     {books.length ? (
                         <BooksTable
