@@ -45,18 +45,21 @@ const Row: React.FC<IRowBook> = ({ book }) => {
             >
                 <TableCell>
                     <Box
-                        component="img"
+                        component="div"
                         sx={{
                             height: '100px',
                             width: '100px'
                         }}
-                        alt={coverPhoto}
-                        src={coverPhoto}
-                    />
+                    >
+                        <img
+                            src={coverPhoto}
+                            alt={title}
+                            width={100}
+                            height={100}
+                        />
+                    </Box>
                 </TableCell>
-                <TableCell component="th" scope="row">
-                    {title}
-                </TableCell>
+                <TableCell align="center">{title}</TableCell>
                 <TableCell size="medium" align="center">
                     {nameOfAuthor}
                 </TableCell>
@@ -72,8 +75,6 @@ const Row: React.FC<IRowBook> = ({ book }) => {
 };
 
 const BooksTable: React.FC<IBooksTable> = ({ books }) => {
-    console.log('books', books);
-
     return (
         <TableContainer component={Paper}>
             <Table>
@@ -88,7 +89,7 @@ const BooksTable: React.FC<IBooksTable> = ({ books }) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {books.length > 0
+                    {books.length
                         ? books.map((book) => <Row key={book.id} book={book} />)
                         : null}
                 </TableBody>
