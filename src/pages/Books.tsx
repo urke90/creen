@@ -39,7 +39,7 @@ const Books: React.FC = () => {
 
     return (
         <>
-            {/* {isLoading && <LoadingSpinner />} */}
+            {isLoading && <LoadingSpinner />}
             <Box sx={{ maxWidth: '1024px', margin: 'auto' }}>
                 <div className="books__header">
                     <Header
@@ -50,7 +50,7 @@ const Books: React.FC = () => {
                     />
                 </div>
                 <div className="books__content">
-                    {books.length > 0 ? <BooksTable books={books} /> : null}
+                    {books.length ? <BooksTable books={books} /> : null}
                 </div>
             </Box>
         </>
