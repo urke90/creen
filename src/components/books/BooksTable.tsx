@@ -11,15 +11,12 @@ import BookMenu from './BookMenu';
 
 import { IBook } from '../../ts/books';
 
-interface IBooksTable {
-    books: IBook[];
-}
-
 interface IRowBook {
     book: IBook;
+    onDeleteBook: (id: number) => void;
 }
 
-const Row: React.FC<IRowBook> = ({ book }) => {
+const Row: React.FC<IRowBook> = ({ book, onDeleteBook }) => {
     const {
         title,
         nameOfAuthor,
@@ -30,16 +27,12 @@ const Row: React.FC<IRowBook> = ({ book }) => {
         id
     } = book;
 
-    console.log('title', title);
-    console.log('coverPhoto', coverPhoto);
-
     return (
         <>
             <TableRow
                 sx={{
                     '& > *': {
                         borderBottom: 'unset'
-                        //irection: 'row reverse'
                     }
                 }}
             >
@@ -67,14 +60,23 @@ const Row: React.FC<IRowBook> = ({ book }) => {
                 <TableCell align="center">{numOfPages}</TableCell>
                 <TableCell align="center">{quantity}</TableCell>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }}>
-                    <BookMenu bookId={id} title={title} />
+                    <BookMenu
+                        bookId={id}
+                        title={title}
+                        onDeleteBook={onDeleteBook}
+                    />
                 </TableCell>
             </TableRow>
         </>
     );
 };
 
-const BooksTable: React.FC<IBooksTable> = ({ books }) => {
+interface IBooksTable {
+    books: IBook[];
+    onDeleteBook: (id: number) => void;
+}
+
+const BooksTable: React.FC<IBooksTable> = ({ books, onDeleteBook }) => {
     return (
         <TableContainer component={Paper}>
             <Table>
@@ -90,7 +92,13 @@ const BooksTable: React.FC<IBooksTable> = ({ books }) => {
                 </TableHead>
                 <TableBody>
                     {books.length
-                        ? books.map((book) => <Row key={book.id} book={book} />)
+                        ? books.map((book) => (
+                              <Row
+                                  key={book.id}
+                                  book={book}
+                                  onDeleteBook={onDeleteBook}
+                              />
+                          ))
                         : null}
                 </TableBody>
             </Table>

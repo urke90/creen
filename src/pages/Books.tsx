@@ -17,6 +17,23 @@ const Books: React.FC = () => {
         (name: string) => setAuthorName(name),
         []
     );
+    const handleDeleteBook = useCallback(
+        async (id: number) => {
+            try {
+                const response = await sendRequest({
+                    url: `books/${id}`,
+                    method: 'DELETE'
+                });
+                if (response?.status === 200) {
+                    setBooks((prevBooks) =>
+                        prevBooks.filter((book) => book.id !== id)
+                    );
+                }
+                console.log('response DELETE BOOK', response);
+            } catch (error) {}
+        },
+        [sendRequest]
+    );
 
     useEffect(() => {
         const fetchBooks = async () => {
@@ -50,7 +67,12 @@ const Books: React.FC = () => {
                     />
                 </div>
                 <div className="books__content">
-                    {books.length ? <BooksTable books={books} /> : null}
+                    {books.length ? (
+                        <BooksTable
+                            books={books}
+                            onDeleteBook={handleDeleteBook}
+                        />
+                    ) : null}
                 </div>
             </Box>
         </>
