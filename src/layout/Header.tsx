@@ -5,6 +5,7 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { makeStyles } from '@mui/styles';
 import { grey } from '@mui/material/colors';
+import { IBook } from '../ts/books';
 
 import './Headers.scss';
 
@@ -62,13 +63,23 @@ const useStyles = makeStyles({
 interface IHeaderProps {
     isEditAddPage?: boolean;
     title: string;
+    books: IBook[];
+    selectedAuthorName: string;
+    onChangeAuthor: (id: string) => void;
 }
 
-const Header: React.FC<IHeaderProps> = ({ isEditAddPage, title }) => {
+const Header: React.FC<IHeaderProps> = ({
+    isEditAddPage,
+    title,
+    books,
+    onChangeAuthor,
+    selectedAuthorName
+}) => {
     const classes = useStyles();
-    // const handleChange = (e: SelectChangeEvent) => {
-    //     console.log('e', e);
-    // };
+    const handleChange = (e: SelectChangeEvent) => {
+        console.log('e', e);
+        onChangeAuthor(e.target.value as string);
+    };
 
     return (
         <header className="header">
@@ -85,9 +96,17 @@ const Header: React.FC<IHeaderProps> = ({ isEditAddPage, title }) => {
                     <Select
                         className={classes.select}
                         sx={{ color: grey[300] }}
+                        onChange={handleChange}
+                        value={selectedAuthorName}
                     >
-                        <MenuItem value="1"> Foo 1</MenuItem>
-                        <MenuItem value="2"> Foo 2</MenuItem>
+                        <MenuItem value="0">All authors</MenuItem>
+                        {books.length > 0
+                            ? books.map(({ id, nameOfAuthor }) => (
+                                  <MenuItem key={id} value={`${nameOfAuthor}`}>
+                                      {nameOfAuthor}
+                                  </MenuItem>
+                              ))
+                            : null}
                     </Select>
                 </FormControl>
             </div>
