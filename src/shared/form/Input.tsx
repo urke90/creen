@@ -10,6 +10,10 @@ interface IInputProps {
     maxWidth?: string;
     isUploadImage?: boolean;
     type?: 'text' | 'number';
+    onChange?: (
+        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => void;
+    readOnly?: boolean;
 }
 
 const Input: React.FC<IInputProps> = ({
@@ -18,7 +22,9 @@ const Input: React.FC<IInputProps> = ({
     defaultValue,
     maxWidth,
     isUploadImage,
-    type = 'text'
+    onChange,
+    type = 'text',
+    readOnly
 }) => {
     const queries = useMediaQuery('(min-width:769px)');
     if (isUploadImage) {
@@ -38,6 +44,9 @@ const Input: React.FC<IInputProps> = ({
                     variant="standard"
                     sx={{
                         maxWidth
+                    }}
+                    InputProps={{
+                        readOnly
                     }}
                     fullWidth={queries ? false : true}
                 />
@@ -72,8 +81,12 @@ const Input: React.FC<IInputProps> = ({
                 sx={{
                     maxWidth
                 }}
+                InputProps={{
+                    readOnly
+                }}
                 type={type}
                 fullWidth={fullWidth}
+                onChange={onChange ? (e) => onChange(e) : () => {}}
             />
         </Box>
     );
