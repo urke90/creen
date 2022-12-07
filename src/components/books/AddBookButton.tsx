@@ -28,7 +28,7 @@ const AddBookButton: React.FC<IAddBookButtonProps> = () => {
                     textDecoration: 'none',
                     color: green[300]
                 }}
-                to="book/add-edit"
+                to="book/add"
                 className="add-book-link"
             >
                 <Box
