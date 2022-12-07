@@ -77,7 +77,6 @@ const Header: React.FC<IHeaderProps> = ({
 }) => {
     const classes = useStyles();
     const handleChange = (e: SelectChangeEvent) => {
-        // console.log('e', e);
         if (onChangeAuthor) {
             onChangeAuthor(e.target.value as string);
         }
