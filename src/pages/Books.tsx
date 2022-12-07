@@ -11,8 +11,9 @@ import AddBookButton from '../components/books/AddBookButton';
 
 const Books: React.FC = () => {
     const [books, setBooks] = useState<IBook[]>([]);
-    const [authorName, setAuthorName] = useState('');
+    const [authorName, setAuthorName] = useState('0');
     const { sendRequest, isLoading, error } = useAxios();
+    const [filteredBooks, setFilteredBooks] = useState<IBook[]>([]);
 
     const handleChangeAuthor = useCallback(
         (name: string) => setAuthorName(name),
@@ -30,7 +31,6 @@ const Books: React.FC = () => {
                         prevBooks.filter((book) => book.id !== id)
                     );
                 }
-                console.log('response DELETE BOOK', response);
             } catch (error) {}
         },
         [sendRequest]
@@ -46,14 +46,26 @@ const Books: React.FC = () => {
                     response.data.records.length > 0
                 ) {
                     setBooks(response.data.records);
+                    setFilteredBooks([...response.data.records]);
                 }
-
-                console.log('response', response);
             } catch (error) {}
         };
 
         fetchBooks();
     }, [sendRequest]);
+
+    useEffect(() => {
+        const filteredBooks = [...books].filter((book) => {
+            if (book.nameOfAuthor === authorName) {
+                return book;
+            } else if (authorName === '0') {
+                return [...books];
+            }
+            return;
+        });
+
+        setFilteredBooks(filteredBooks);
+    }, [authorName, books]);
 
     return (
         <>
@@ -77,9 +89,9 @@ const Books: React.FC = () => {
                     <AddBookButton />
                 </Box>
                 <div className="books__content">
-                    {books.length ? (
+                    {filteredBooks.length ? (
                         <BooksTable
-                            books={books}
+                            books={filteredBooks}
                             onDeleteBook={handleDeleteBook}
                         />
                     ) : null}

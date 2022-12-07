@@ -77,6 +77,8 @@ interface IBooksTable {
 }
 
 const BooksTable: React.FC<IBooksTable> = ({ books, onDeleteBook }) => {
+    console.log('books IN TABLE', books);
+
     return (
         <TableContainer component={Paper}>
             <Table>
