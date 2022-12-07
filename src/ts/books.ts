@@ -5,7 +5,7 @@ export interface IBook {
     nameOfAuthor: string;
     dateOfBirthAuthor: string;
     quantity: number;
-    numOfPages: number;
+    numberOfPages: number;
     coverPhoto: string;
-    yearOfBublishing: number;
+    yearOfPublishing: number;
 }
