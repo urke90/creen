@@ -48,10 +48,6 @@ const EditBookForm: React.FC<IEditBookFormProps> = ({ book }) => {
         } catch (error) {}
     };
 
-    const handleChangeQuantity = (value: number) => {
-        setUpdatedQuantity(value);
-    };
-
     if (isLoading) {
         return <LoadingSpinner />;
     }
@@ -97,7 +93,7 @@ const EditBookForm: React.FC<IEditBookFormProps> = ({ book }) => {
                 type="number"
                 onChange={(
                     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-                ) => handleChangeQuantity(Number(e.target.value))}
+                ) => setUpdatedQuantity(Number(e.target.value))}
             />
             <Input
                 label="Cover photo"
