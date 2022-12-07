@@ -63,9 +63,9 @@ const useStyles = makeStyles({
 interface IHeaderProps {
     isEditAddPage?: boolean;
     title: string;
-    books: IBook[];
-    selectedAuthorName: string;
-    onChangeAuthor: (id: string) => void;
+    books?: IBook[];
+    selectedAuthorName?: string;
+    onChangeAuthor?: (id: string) => void;
 }
 
 const Header: React.FC<IHeaderProps> = ({
@@ -77,8 +77,10 @@ const Header: React.FC<IHeaderProps> = ({
 }) => {
     const classes = useStyles();
     const handleChange = (e: SelectChangeEvent) => {
-        console.log('e', e);
-        onChangeAuthor(e.target.value as string);
+        // console.log('e', e);
+        if (onChangeAuthor) {
+            onChangeAuthor(e.target.value as string);
+        }
     };
 
     return (
@@ -86,29 +88,34 @@ const Header: React.FC<IHeaderProps> = ({
             {isEditAddPage && <ArrowBackIcon className="header__back-arrow" />}
             <div className="header__content">
                 <h2>{title}</h2>
-                <FormControl className={classes.formControl}>
-                    <InputLabel
-                        className={classes.label}
-                        id="demo-select-small"
-                    >
-                        Any author
-                    </InputLabel>
-                    <Select
-                        className={classes.select}
-                        sx={{ color: grey[300] }}
-                        onChange={handleChange}
-                        value={selectedAuthorName}
-                    >
-                        <MenuItem value="0">All authors</MenuItem>
-                        {books.length > 0
-                            ? books.map(({ id, nameOfAuthor }) => (
-                                  <MenuItem key={id} value={`${nameOfAuthor}`}>
-                                      {nameOfAuthor}
-                                  </MenuItem>
-                              ))
-                            : null}
-                    </Select>
-                </FormControl>
+                {!isEditAddPage && (
+                    <FormControl className={classes.formControl}>
+                        <InputLabel
+                            className={classes.label}
+                            id="demo-select-small"
+                        >
+                            Any author
+                        </InputLabel>
+                        <Select
+                            className={classes.select}
+                            sx={{ color: grey[300] }}
+                            onChange={handleChange}
+                            value={selectedAuthorName}
+                        >
+                            <MenuItem value="0">All authors</MenuItem>
+                            {books && books.length > 0
+                                ? books.map(({ id, nameOfAuthor }) => (
+                                      <MenuItem
+                                          key={id}
+                                          value={`${nameOfAuthor}`}
+                                      >
+                                          {nameOfAuthor}
+                                      </MenuItem>
+                                  ))
+                                : null}
+                        </Select>
+                    </FormControl>
+                )}
             </div>
         </header>
     );
