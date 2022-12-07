@@ -67,37 +67,40 @@ const Books: React.FC = () => {
         setFilteredBooks(filteredBooks);
     }, [authorName, books]);
 
+    if (isLoading) {
+        return <LoadingSpinner />;
+    } else if (!isLoading && error) {
+        return <Box component="h1">Something went wrong</Box>;
+    }
+
     return (
-        <>
-            {isLoading && <LoadingSpinner />}
-            <Box
-                sx={{
-                    maxWidth: '1024px',
-                    margin: 'auto',
-                    position: 'relative'
-                }}
-            >
-                <div className="books__header">
-                    <Header
-                        title="Books"
-                        books={books}
-                        onChangeAuthor={handleChangeAuthor}
-                        selectedAuthorName={authorName}
-                    />
-                </div>
-                <Box>
-                    <AddBookButton />
-                </Box>
-                <div className="books__content">
-                    {filteredBooks.length ? (
-                        <BooksTable
-                            books={filteredBooks}
-                            onDeleteBook={handleDeleteBook}
-                        />
-                    ) : null}
-                </div>
+        <Box
+            sx={{
+                maxWidth: '1024px',
+                margin: 'auto',
+                position: 'relative'
+            }}
+        >
+            <div className="books__header">
+                <Header
+                    title="Books"
+                    books={books}
+                    onChangeAuthor={handleChangeAuthor}
+                    selectedAuthorName={authorName}
+                />
+            </div>
+            <Box>
+                <AddBookButton />
             </Box>
-        </>
+            <div className="books__content">
+                {filteredBooks.length ? (
+                    <BooksTable
+                        books={filteredBooks}
+                        onDeleteBook={handleDeleteBook}
+                    />
+                ) : null}
+            </div>
+        </Box>
     );
 };
 

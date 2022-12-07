@@ -13,7 +13,7 @@ interface IEditBookFormProps {
 }
 
 const EditBookForm: React.FC<IEditBookFormProps> = ({ book }) => {
-    const { sendRequest, isLoading } = useAxios();
+    const { sendRequest, isLoading, error } = useAxios();
     const navigate = useNavigate();
     const {
         title,
@@ -50,6 +50,17 @@ const EditBookForm: React.FC<IEditBookFormProps> = ({ book }) => {
 
     if (isLoading) {
         return <LoadingSpinner />;
+    } else if (!isLoading && error) {
+        return (
+            <Box
+                sx={{
+                    textAlign: 'center'
+                }}
+                component="h1"
+            >
+                Something went wrong
+            </Box>
+        );
     }
 
     return (

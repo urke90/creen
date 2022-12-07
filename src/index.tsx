@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider } from 'react-router-dom';
 
-import CssBaseline from '@mui/material/CssBaseline';
 import reportWebVitals from './reportWebVitals';
 
 import { routes } from './router/Router';
@@ -14,7 +13,6 @@ const root = ReactDOM.createRoot(
 );
 root.render(
     <React.StrictMode>
-        {/* <CssBaseline /> */}
         <RouterProvider router={routes} />
     </React.StrictMode>
 );

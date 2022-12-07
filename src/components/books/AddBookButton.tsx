@@ -1,11 +1,8 @@
 import { Box } from '@mui/system';
 import { Link } from 'react-router-dom';
 import { grey, green } from '@mui/material/colors';
-import React from 'react';
 
-interface IAddBookButtonProps {}
-
-const AddBookButton: React.FC<IAddBookButtonProps> = () => {
+const AddBookButton: React.FC = () => {
     return (
         <Box
             sx={{

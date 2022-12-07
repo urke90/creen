@@ -1,7 +1,10 @@
 import axios from 'axios';
 
 const instance = axios.create({
-    baseURL: 'https://book-store.mvsoft.co.rs/'
+    baseURL: 'https://book-store.mvsoft.co.rs/',
+    headers: {
+        'Content-Type': 'application/json'
+    }
 });
 
 /**
