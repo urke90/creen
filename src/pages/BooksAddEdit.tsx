@@ -4,9 +4,11 @@ import { Box } from '@mui/system';
 
 import { IBook } from '../ts/books';
 import { useAxios } from '../hooks/use-axios';
+import AddBookForm from '../components/forms/AddBookForm';
 import EditBookForm from '../components/forms/EditBookForm';
 import Header from '../layout/Header';
 import LoadingSpinner from '../shared/LoadingSpinner';
+
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 interface IBooksAddEditProps {}
@@ -56,11 +58,12 @@ const BooksAddEdit: React.FC<IBooksAddEditProps> = () => {
             >
                 {fetchedBook && isEditPage ? (
                     <EditBookForm book={fetchedBook} />
-                ) : (
+                ) : isEditPage ? (
                     <Box component="h1">
                         Something went worng, can show book details
                     </Box>
-                )}
+                ) : null}
+                {!isEditPage && <AddBookForm />}
             </Box>
         </Box>
     );
