@@ -14,7 +14,7 @@ const AddBookForm: React.FC = () => {
     const [numberOfPages, setnumberOfPages] = useState(0);
     const [quantity, setQuantity] = useState(0);
     const [dateOfBirthAuthor, setdateOfBirthAuthor] = useState('');
-    const [yearOfPublishing, setYearOfPublishing] = useState(0);
+    const [yearOfPublishing, setYearOfBublishing] = useState(0);
     const { sendRequest, isLoading } = useAxios();
     const navigate = useNavigate();
 
@@ -93,7 +93,7 @@ const AddBookForm: React.FC = () => {
                 type="number"
                 onChange={(
                     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-                ) => setYearOfPublishing(Number(e.target.value))}
+                ) => setYearOfBublishing(Number(e.target.value))}
             />
             <Input
                 fullWidth={queries ? false : true}

@@ -20,9 +20,9 @@ const Row: React.FC<IRowBook> = ({ book, onDeleteBook }) => {
     const {
         title,
         nameOfAuthor,
-        yearOfPublishing,
+        yearOfBublishing,
         coverPhoto,
-        numberOfPages,
+        numOfPages,
         quantity,
         id
     } = book;
@@ -56,8 +56,8 @@ const Row: React.FC<IRowBook> = ({ book, onDeleteBook }) => {
                 <TableCell size="medium" align="center">
                     {nameOfAuthor}
                 </TableCell>
-                <TableCell align="center">{yearOfPublishing}</TableCell>
-                <TableCell align="center">{numberOfPages}</TableCell>
+                <TableCell align="center">{yearOfBublishing}</TableCell>
+                <TableCell align="center">{numOfPages}</TableCell>
                 <TableCell align="center">{quantity}</TableCell>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }}>
                     <BookMenu
