@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -75,6 +77,7 @@ const Header: React.FC<IHeaderProps> = ({
     onChangeAuthor,
     selectedAuthorName
 }) => {
+    const navigate = useNavigate();
     const classes = useStyles();
     const handleChange = (e: SelectChangeEvent) => {
         if (onChangeAuthor) {
@@ -84,7 +87,15 @@ const Header: React.FC<IHeaderProps> = ({
 
     return (
         <header className="header">
-            {isEditAddPage && <ArrowBackIcon className="header__back-arrow" />}
+            {isEditAddPage && (
+                <ArrowBackIcon
+                    onClick={() => navigate('/')}
+                    className="header__back-arrow"
+                    sx={{
+                        cursor: 'pointer'
+                    }}
+                />
+            )}
             <div className="header__content">
                 <h2>{title}</h2>
                 {!isEditAddPage && (

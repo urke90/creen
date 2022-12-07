@@ -19,8 +19,8 @@ const EditBookForm: React.FC<IEditBookFormProps> = ({ book }) => {
         title,
         nameOfAuthor,
         dateOfBirthAuthor,
-        yearOfPublishing,
-        numberOfPages,
+        yearOfBublishing,
+        numOfPages,
         quantity,
         coverPhoto,
         id
@@ -75,14 +75,14 @@ const EditBookForm: React.FC<IEditBookFormProps> = ({ book }) => {
             <Input
                 fullWidth={queries ? false : true}
                 label="Number of pages"
-                defaultValue={numberOfPages ? numberOfPages : 0}
+                defaultValue={numOfPages ? numOfPages : 0}
                 type="text"
                 readOnly
             />
             <Input
                 fullWidth={queries ? false : true}
                 label="Year of publishing"
-                defaultValue={yearOfPublishing ? yearOfPublishing : 0}
+                defaultValue={yearOfBublishing ? yearOfBublishing : 0}
                 type="number"
                 readOnly
             />
