@@ -5,17 +5,14 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
-const ITEM_HEIGHT = 48;
-
 interface IBookMenuProps {
-    title: string;
     bookId: number;
     onDeleteBook: (id: number) => void;
 }
 
 const BookMenu: React.FC<IBookMenuProps> = ({
     bookId,
-    title,
+
     onDeleteBook
 }) => {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -52,12 +49,6 @@ const BookMenu: React.FC<IBookMenuProps> = ({
                 anchorEl={anchorEl}
                 open={open}
                 onClose={handleClose}
-                PaperProps={{
-                    style: {
-                        maxHeight: ITEM_HEIGHT * 4.5
-                        // width: '20ch'
-                    }
-                }}
             >
                 <MenuItem onClick={handleDeleteBook}>Delete</MenuItem>
                 <MenuItem onClick={handleClose}>Preview</MenuItem>

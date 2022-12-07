@@ -5,7 +5,6 @@ import { Box } from '@mui/system';
 import { Button } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useAxios } from '../../hooks/use-axios';
-import { IBook } from '../../ts/books';
 import LoadingSpinner from '../../shared/LoadingSpinner';
 
 const AddBookForm: React.FC = () => {
@@ -15,7 +14,7 @@ const AddBookForm: React.FC = () => {
     const [quantity, setQuantity] = useState(0);
     const [dateOfBirthAuthor, setdateOfBirthAuthor] = useState('');
     const [yearOfPublishing, setYearOfBublishing] = useState(0);
-    const { sendRequest, isLoading } = useAxios();
+    const { sendRequest, isLoading, error } = useAxios();
     const navigate = useNavigate();
 
     const queries = useMediaQuery('(min-width:769px)');
@@ -31,7 +30,7 @@ const AddBookForm: React.FC = () => {
             yearOfPublishing,
             quantity,
             dateOfBirthAuthor,
-            coverPhoto: 'asdsada'
+            coverPhoto: ''
         };
 
         try {
@@ -49,6 +48,17 @@ const AddBookForm: React.FC = () => {
 
     if (isLoading) {
         return <LoadingSpinner />;
+    } else if (!isLoading && error) {
+        return (
+            <Box
+                sx={{
+                    textAlign: 'center'
+                }}
+                component="h1"
+            >
+                Something went wrong
+            </Box>
+        );
     }
 
     return (

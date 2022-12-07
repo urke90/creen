@@ -60,11 +60,7 @@ const Row: React.FC<IRowBook> = ({ book, onDeleteBook }) => {
                 <TableCell align="center">{numOfPages}</TableCell>
                 <TableCell align="center">{quantity}</TableCell>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }}>
-                    <BookMenu
-                        bookId={id}
-                        title={title}
-                        onDeleteBook={onDeleteBook}
-                    />
+                    <BookMenu bookId={id} onDeleteBook={onDeleteBook} />
                 </TableCell>
             </TableRow>
         </>
@@ -77,8 +73,6 @@ interface IBooksTable {
 }
 
 const BooksTable: React.FC<IBooksTable> = ({ books, onDeleteBook }) => {
-    console.log('books IN TABLE', books);
-
     return (
         <TableContainer component={Paper}>
             <Table>

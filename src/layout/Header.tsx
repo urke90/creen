@@ -47,7 +47,8 @@ const useStyles = makeStyles({
     },
     label: {
         '&.MuiFormLabel-root': {
-            color: grey[300]
+            color: grey[300],
+            top: '-14px'
         },
         '&.MuiInputLabel-outlined': {
             color: grey[300]
